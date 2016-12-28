@@ -21,7 +21,7 @@ Run **TDParse**
 Run **Naive-seg**
 ```bash
 ## e.g. 
-./run.sh election naiveseg sklearnSVM ../data/election/parses/election.train.conll ../data/election/parses/election.test.conll
+./run.sh election naiveseg sklearnSVM
 ```
 
 ## Reference
