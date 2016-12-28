@@ -1,6 +1,8 @@
 # TDParse - Multi-target-specific sentiment recognition on Twitter
 From the EACL 2017 paper, TDParse utilises the syntactic information from parse-tree in conjunction with the left-right context of the target and achieves the state-of-the-art performance on both the benchmarking single-target corpus and new multi-target election data.
 
+Our approximated version of the LSTM models proposed in [COLING 2016](https://arxiv.org/abs/1512.01100), can be found at [here](https://github.com/bluemonk482/tdlstm).
+
 ## Dependencies
 - Python 2.7
 - sklearn >= 0.18.1
