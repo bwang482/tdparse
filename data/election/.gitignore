@@ -1,0 +1,6 @@
+## This directory stores our multi-target election corpus
+
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
