@@ -14,3 +14,4 @@ models/*.model
 
 # stored feature range file:
 liblinear/range
+liblinear/*DS_Store
