@@ -1,0 +1,6 @@
+Add following directories:
+output/ #for storing output files e.g. libsvm formatted feature files and predicted labels
+output/cv/ #for storing temp files used during cross-validation
+training/ #for storing training data
+testing/ #for storing testing data
+parses/ #for storing dependency parses (in CoNLL format) for training and testing data
