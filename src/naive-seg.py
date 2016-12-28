@@ -330,8 +330,8 @@ class targettw(object):
             feature=np.concatenate([feature,lefts])
             feature=np.concatenate([feature,rights])
             feature=np.concatenate([feature,tars])
-            # feature=np.concatenate([feature,leftsentis])
-            # feature=np.concatenate([feature,rightsentis])
+            feature=np.concatenate([feature,leftsentis])
+            feature=np.concatenate([feature,rightsentis])
                         
         elif emode == 'seg':
             feature=np.concatenate([feature,fulltws])
@@ -359,8 +359,8 @@ class targettw(object):
             segs, target_position = segment(tw, target)
             feature=self.concattw(feature,size1,segs,'w2v',target_position,target,False,'seg') 
             feature=self.concattw(feature,size2,segs,'sswe',target_position,target,False,'seg')
-            # feature=self.concattw(feature,size1,tw,'w2v',loc,target,False,'full') 
-            # feature=self.concattw(feature,size2,tw,'sswe',loc,target,False,'full')
+            feature=self.concattw(feature,size1,tw,'w2v',loc,target,False,'full') 
+            feature=self.concattw(feature,size2,tw,'sswe',loc,target,False,'full')
             x=np.concatenate([x,feature])
         x=x.reshape((len(y),len(x)/len(y)))
         print x.shape

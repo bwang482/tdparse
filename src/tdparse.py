@@ -396,6 +396,7 @@ class targettw(object):
                 feature=np.concatenate([feature,lefts])
                 feature=np.concatenate([feature,rights])
                 feature=np.concatenate([feature,tars])
+
                 feature=np.concatenate([feature,leftsentis])
                 feature=np.concatenate([feature,rightsentis])
                         
@@ -481,8 +482,8 @@ class targettw(object):
             else:
                 feature=self.concattw(feature,size1,subtw,'w2v',target_position,target,False,'parse') 
                 feature=self.concattw(feature,size2,subtw,'sswe',target_position,target,False,'parse')
-            feature=self.concattw(feature,size1,tw,'w2v',[loc],target,False,'full') 
-            feature=self.concattw(feature,size2,tw,'sswe',[loc],target,False,'full')
+            # feature=self.concattw(feature,size1,tw,'w2v',[loc],target,False,'full') 
+            # feature=self.concattw(feature,size2,tw,'sswe',[loc],target,False,'full')
             x=np.concatenate([x,feature])
         x=x.reshape((len(y),len(x)/len(y)))
         print x.shape
