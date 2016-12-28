@@ -1,0 +1,6 @@
+## This directory stores lexicon resources
+
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
