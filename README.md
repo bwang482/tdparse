@@ -12,7 +12,7 @@ Our approximated version of the LSTM models proposed in [COLING 2016](https://ar
 - [TweeboParser](https://github.com/ikekonglp/TweeboParser) >= April 1, 2016
 
 ## Data
-You can find our election corpus [here](https://dx.doi.org/10.6084/m9.figshare.4479563.v1).
+You can find our election corpus at [here](https://dx.doi.org/10.6084/m9.figshare.4479563.v1).
 
 ## Usage
 Run **TDParse**
