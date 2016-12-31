@@ -1,6 +1,3 @@
 ## This directory stores pre-trained word embedding resources
 
-# Ignore everything in this directory
-*
-# Except this file
-!.gitignore
+._*

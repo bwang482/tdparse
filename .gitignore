@@ -4,10 +4,6 @@
 data/lidong/*
 data/election/*
 
-# resource files:
-resources/lexicons/*
-resources/wordemb/*
-
 # already trained model files:
 models/cv/*
 models/*.model
