@@ -7,7 +7,7 @@ from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit, GroupK
 from sklearn.datasets import load_svmlight_file
 from sklearn.externals import joblib
 from utilities import readfeats, readfeats_sklearn, twoclass_fscore, frange
-# from classification import scaling
+# from liblinear import scaling
 
 
 
