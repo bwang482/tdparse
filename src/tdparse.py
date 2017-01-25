@@ -1,3 +1,7 @@
+""" 
+For generating libsvm-formated feature vectors.
+Many functions here are borrowed from Duy-Tin Vo's implementation
+"""
 import sys
 sys.path.insert(0, r'../')
 import os
@@ -391,12 +395,15 @@ class targettw(object):
                                   np.median(rightsenti_sum, axis=0)])
         if emode == 'full':
             if emp:
+                # Adds full tweet feature vectors
                 feature=np.concatenate([feature,fulltws])
             else:
                 feature=np.concatenate([feature,lefts])
                 feature=np.concatenate([feature,rights])
                 feature=np.concatenate([feature,tars])
 
+                # Adds features from lexicon filtered words
+                # (not used on the election data)
                 feature=np.concatenate([feature,leftsentis])
                 feature=np.concatenate([feature,rightsentis])
                         
@@ -426,7 +433,7 @@ class targettw(object):
             except Exception as e:
               print "Couldn't find the tokenised target!"
               print target, tw
-            subtw, target_position, emp = traversaltree(conll[a],target,emp,'cmu')
+            subtw, target_position, emp = traversaltree(conll[a],target,emp,'cmu') #returns relevant words to the target
             emp = False
             if emp:
               count+=1
@@ -482,8 +489,8 @@ class targettw(object):
             else:
                 feature=self.concattw(feature,size1,subtw,'w2v',target_position,target,False,'parse') 
                 feature=self.concattw(feature,size2,subtw,'sswe',target_position,target,False,'parse')
-            # feature=self.concattw(feature,size1,tw,'w2v',[loc],target,False,'full') 
-            # feature=self.concattw(feature,size2,tw,'sswe',[loc],target,False,'full')
+            feature=self.concattw(feature,size1,tw,'w2v',[loc],target,False,'full') 
+            feature=self.concattw(feature,size2,tw,'sswe',[loc],target,False,'full')
             x=np.concatenate([x,feature])
         x=x.reshape((len(y),len(x)/len(y)))
         print x.shape

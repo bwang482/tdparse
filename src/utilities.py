@@ -9,11 +9,16 @@ import collections
 
 
 def twoclass_fscore(y_predicted, y_true):
+    """ Computes F-1 score for pos and neg labels
+    """
     f = (metrics.f1_score(y_true, y_predicted, average=None)[0]+metrics.f1_score(y_true, y_predicted, average=None)[-1])/2
     return f
 
 
 def feval(truefile, predfile):
+    """ Takes pred and gold label files as inputs;
+        outputs pred and gold label as lists
+    """
     truefile = os.path.abspath(truefile)
     predfile = os.path.abspath(predfile)
     f1 = open(truefile, 'r')
@@ -72,7 +77,7 @@ def readfeats_sklearn(datapath):
 
 
 def readConll(filepath, pmode):
-    """ Reads parse conll file
+    """ Reads CoNLL-formated parse file
     """
     conll=[]
     with open(filepath, 'r') as fin:
@@ -142,9 +147,9 @@ def dsigmoid(y):
     return y * (1.0 - y)   
 
 
-def traversaltree(conll,target,empty,pmode):
-    """Processes conll-format parse data and outputs words with corresponding POS tags
-    as well as the index position of the target entity
+def traversaltree(conll, target, empty, pmode):
+    """Processes CoNLL-formated parse data and outputs words with corresponding POS tags
+       as well as the index position of the target entity
     """
     G = nx.Graph()
     for position, token, tag, parser, rel in conll:
@@ -165,8 +170,10 @@ def traversaltree(conll,target,empty,pmode):
       if token == target:
         target_positions.append(position)
 
+    # When CMU parser is used.
     if pmode=='cmu':
         positions = [[item for sublist in traversal.bfs_successors(G, target_position).values() for item in sublist] for target_position in target_positions]
+    # When Stanford parser is used.
     elif pmode=='stanford':
         positions = [[item for sublist in [traversal.bfs_successors(G, target_position).keys()] for item in sublist] for target_position in target_positions]
 

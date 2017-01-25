@@ -7,6 +7,7 @@ if [ "$classifier" == "liblinear" ]; then
 	steps=$4 #scale,tune,pred
 	trainparsefile="$5" #../data/lidong/parses/lidong.train.conll
 	testparsefile="$6" #../data/lidong/parses/lidong.test.conll
+	c="$7" #C parameter; when parameter tuning is not desired; optional
 elif [ "$classifier" == "sklearnSVM" ]; then
 	trainparsefile="$4" #../data/lidong/parses/lidong.train.conll
 	testparsefile="$5" #../data/lidong/parses/lidong.test.conll
@@ -17,10 +18,10 @@ else
 
 if [ "$model" == "naiveseg" ] && [ "$classifier" == "liblinear" ]; then
 	python naive-seg.py --data "$data"
-	python liblinear.py --data "$data" --steps "$steps"
+	python liblinear.py --data "$data" --steps "$steps" --c "$c"
 elif [ "$model" == "tdparse" ] && [ "$classifier" == "liblinear" ]; then
 	python tdparse.py --data "$data" --trainparse "$trainparsefile" --testparse "$testparsefile"
-	python liblinear.py --data "$data" --steps "$steps"
+	python liblinear.py --data "$data" --steps "$steps" --c "$c"
 
 elif [ "$model" == "naiveseg" ] && [ "$classifier" == "sklearnSVM" ]; then
 	python naive-seg.py --data "$data"

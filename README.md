@@ -15,14 +15,17 @@ Our approximated version of the LSTM models proposed in [COLING 2016](https://ar
 You can find our election corpus at [here](https://dx.doi.org/10.6084/m9.figshare.4479563.v1).
 
 ## Usage
+
 Run **TDParse**
 ```bash
-## e.g. 
+## e.g. using LibLinear with parameter tuning:
 ./run.sh lidong tdparse liblinear scale,tune,pred ../data/lidong/parses/lidong.train.conll ../data/lidong/parses/lidong.test.conll
+## or without parameter tuning; adding your choice of C-parameter in the end:
+./run.sh lidong tdparse liblinear scale,pred ../data/lidong/parses/lidong.train.conll ../data/lidong/parses/lidong.test.conll 0.01
 ```
 Run **Naive-seg**
 ```bash
-## e.g. 
+## e.g. using scikit-learn implementation of Linear SVM
 ./run.sh election naiveseg sklearnSVM
 ```
 

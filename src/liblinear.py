@@ -2,7 +2,7 @@ import subprocess
 from argparse import ArgumentParser
 import numpy as np
 from sklearn import metrics
-from sklearn.cross_validation import ShuffleSplit, StratifiedShuffleSplit
+from sklearn.cross_validation import ShuffleSplit
 from sklearn.cross_validation import LabelKFold
 from utilities import feval, frange, getlabels, writingfile, readfeats
 
@@ -53,8 +53,7 @@ def CV(ci,trfile,CV_trfile,CV_tfile,CV_pfile,CV_truey,id_train):
     feats = readfeats(trfile)
     # ids = readfeats(id_train)
     # cv = LabelKFold(ids, n_folds=5)
-    cv = ShuffleSplit(n=len(feats), n_iter=5, test_size=0.4, random_state=0)
-    # cv = StratifiedShuffleSplit(y=getlabels(feats), n_iter=5, test_size=0.3, random_state=0)
+    cv = ShuffleSplit(n=len(feats), n_iter=5, test_size=0.2, random_state=0)
     acc_list = []
     f1_three_list = []
     f1_two_list = []
@@ -104,8 +103,8 @@ def TUNE(trfile,cv_trfile,cv_tfile,cv_pfile,cv_truey,id_train):
     c.extend([i for i in crange])
     crange=frange(0.00009,10,10)
     c.extend([i for i in crange])
-    c.sort() #Cost parameter values
-    # c=c[:20]
+    c.sort() #Cost parameter values; use a bigger search space for better performance
+    c=c[:5]
     tunec=[]
     for ci in c:
         tunec.append([ci] + CV(str(ci),trfile,cv_trfile,cv_tfile,cv_pfile,cv_truey,id_train))

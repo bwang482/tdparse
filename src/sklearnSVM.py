@@ -3,10 +3,10 @@ from argparse import ArgumentParser
 import numpy as np
 from sklearn import svm, metrics
 from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit, GroupKFold
+from sklearn.model_selection import ShuffleSplit, GroupKFold
 from sklearn.datasets import load_svmlight_file
 from sklearn.externals import joblib
-from utilities import readfeats, readfeats_sklearn, twoclass_fscore, frange
+from utilities import readfeats, readfeats_sklearn, twoclass_fscore, frange, writingfile
 # from liblinear import scaling
 
 
@@ -21,6 +21,7 @@ def predict(clf, x_train, y_train, x_test, y_test):
     print 'Macro-F1 score: ', metrics.f1_score(y_test, y_predicted, average='macro')
     print 'Accuracy score: ', metrics.accuracy_score(y_test, y_predicted)
     print "Macro-F1 score (2 classes):", (metrics.f1_score(y_test, y_predicted, average=None)[0]+metrics.f1_score(y_test, y_predicted, average=None)[-1])/2
+    return y_predicted
 
 
 def CV(x_train, y_train):
@@ -35,8 +36,8 @@ def CV(x_train, y_train):
     c.extend([i for i in crange])
     crange=frange(0.00009,10,10)
     c.extend([i for i in crange])
-    c.sort()
-    # c = c[:20]
+    c.sort() #Cost parameter values; use a bigger search space for better performance
+    c = c[:5]
     
     cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0).split(x_train, y_train)
     # ids = readfeats('../data/election/output/id_train') # only for election data
@@ -72,17 +73,26 @@ def main(output_dir):
     # print "scaling features"
     # scaling(output_dir)
 
-    print "extracting features for training"
+    print "loading features for training"
     x_train, y_train = readfeats_sklearn(trfile)
-    print "extracting features for testing"
+    print "loading features for testing"
     x_test, y_test = readfeats_sklearn(tfile)
     
     print "cross-validation"
-    clf = CV(x_train, y_train)
+    clf = CV(x_train, y_train) # Comment this if parameter tuning is not desired
+
+    # print "training classifier"
+    # clf = svm.LinearSVC(C=1, class_weight='balanced') # Manually select C-parameter for training SVM
+    # clf.fit(x_train, y_train)
+
     # print "saving trained model"
-    # save_model(clf, '')
+    # save_model(clf, '../models/sklearn_saved.model')
+
     print "evaluation"
-    predict(clf, x_train, y_train, x_test, y_test)
+    preds = predict(clf, x_train, y_train, x_test, y_test)
+
+    print "writing labels"
+    writingfile(pfile, preds)
     
 
 if __name__ == "__main__":
