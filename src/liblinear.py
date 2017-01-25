@@ -104,7 +104,7 @@ def TUNE(trfile,cv_trfile,cv_tfile,cv_pfile,cv_truey,id_train):
     crange=frange(0.00009,10,10)
     c.extend([i for i in crange])
     c.sort() #Cost parameter values; use a bigger search space for better performance
-    c=c[:5]
+    
     tunec=[]
     for ci in c:
         tunec.append([ci] + CV(str(ci),trfile,cv_trfile,cv_tfile,cv_pfile,cv_truey,id_train))

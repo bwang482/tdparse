@@ -37,7 +37,6 @@ def CV(x_train, y_train):
     crange=frange(0.00009,10,10)
     c.extend([i for i in crange])
     c.sort() #Cost parameter values; use a bigger search space for better performance
-    c = c[:5]
     
     cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0).split(x_train, y_train)
     # ids = readfeats('../data/election/output/id_train') # only for election data
