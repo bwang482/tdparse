@@ -1,6 +1,3 @@
 ## This directory stores the single-target tweet corpus by Dong et al. (2014)
 
-# Ignore everything in this directory
-*
-# Except this file
-!.gitignore
+output/*
