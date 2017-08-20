@@ -38,15 +38,15 @@ def CV(x_train, y_train):
     c.extend([i for i in crange])
     c.sort() #Cost parameter values; use a bigger search space for better performance
     
-    cv = ShuffleSplit(n_splits=5, test_size=0.3, random_state=0).split(x_train, y_train)
+    cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=0).split(x_train, y_train)
     # ids = readfeats('../data/election/output/id_train') # only for election data
     # cv = GroupKFold(n_splits=5).split(x_train, y_train, ids)
     clf = svm.LinearSVC()
-    param_grid = [{'C': c, 'class_weight': ['balanced']}]
+    param_grid = [{'C': c}]
 
     twoclass_f1_macro = metrics.make_scorer(twoclass_fscore, greater_is_better=True)
     precision_macro = metrics.make_scorer(macro_averaged_precision, greater_is_better=True)
-    grid_search = GridSearchCV(clf, param_grid=param_grid, cv=cv, verbose=0, scoring='accuracy')
+    grid_search = GridSearchCV(clf, param_grid=param_grid, cv=cv, verbose=0, scoring='f1_macro')
     
     grid_search.fit(x_train, y_train)
     print("Best parameters set:")
