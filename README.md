@@ -6,8 +6,8 @@ Our approximated version of the LSTM models proposed in [COLING 2016](https://ar
 ## Dependencies
 - Python 2.7
 - sklearn >= 0.18.1
-- gensim >= 0.13.4
-- networkx >= 1.11
+- gensim == 0.13.4
+- networkx == 1.11
 - [ftfy](https://github.com/LuminosoInsight/python-ftfy) >= 4.1.1
 - [TweeboParser](https://github.com/ikekonglp/TweeboParser) >= April 1, 2016
 
